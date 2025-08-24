@@ -15,7 +15,6 @@ const ArPage = () => {
   // if (!isAcknowledge) {
   //   return <div>Instruction</div>;
   // }
-
   return (
     <div>
       {/* iframe */}
