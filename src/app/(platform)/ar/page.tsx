@@ -19,7 +19,7 @@ const ArPage = () => {
     <div>
       {/* iframe */}
       <iframe
-        src={`https://web-ar-app-ashy.vercel.app?username=${username}`}
+        src={`https://wsansuk.github.io/web-ar-app?username=${username}`}
         frameBorder="0"
         scrolling="yes"
         seamless
