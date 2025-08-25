@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useReadLocalStorage } from "usehooks-ts";
 
 import AnimatedContent from "@/components/blocks/Animations/AnimatedContent/AnimatedContent";
@@ -9,6 +9,11 @@ import { HomeCarousel } from "@/modules/home/components/HomeCarousel";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  // เคลียร์ค่า wd_ar_workshop ตอนเข้าหน้า Home
+  useEffect(() => {
+    localStorage.removeItem("wd_ar_workshop");
+  }, []);
+
   const username = useReadLocalStorage<string>("wd_ar_workshop");
 
   const next_link = useMemo(() => {
