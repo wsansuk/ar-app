@@ -106,7 +106,15 @@ export const AdminProcedure = router({
         );
       });
 
-      return formatResponse("leaderboard", result, "Success", "0000");
+      return formatResponse(
+        "leaderboard",
+        result.map((r) => ({
+          ...r,
+          updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : null,
+        })),
+        "Success",
+        "0000"
+      );
     } catch (error) {
       console.error(error);
       return formatResponse(
