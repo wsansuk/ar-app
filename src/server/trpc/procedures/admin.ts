@@ -96,10 +96,8 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
-        // แปลง updatedAt จาก UTC → Bangkok local
         const updatedAtBangkok = row.updatedAt
-          ? dayjs
-              .utc(row.updatedAt.toISOString())
+          ? dayjs(new Date(`${row.updatedAt}Z`))
               .tz("Asia/Bangkok")
               .format("YYYY-MM-DD HH:mm:ss")
           : null;
@@ -113,14 +111,17 @@ export const AdminProcedure = router({
 
       // sort: มาก → น้อย, ถ้าเท่ากัน updatedAt น้อยก่อน
       result.sort((a, b) => {
+        // sort by stationCount มาก → น้อย
         if (b.stationCount !== a.stationCount)
           return b.stationCount - a.stationCount;
+
         if (!a.updatedAt) return 1;
         if (!b.updatedAt) return -1;
 
-        const aTime = dayjs(a.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
-        const bTime = dayjs(b.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
-        return aTime - bTime;
+        const aTime = dayjs.tz(a.updatedAt, "Asia/Bangkok").valueOf();
+        const bTime = dayjs.tz(b.updatedAt, "Asia/Bangkok").valueOf();
+
+        return aTime - bTime; // updatedAt น้อย → มาก
       });
 
       return formatResponse("leaderboard", result, "Success", "0000");
