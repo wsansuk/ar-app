@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { useReadLocalStorage } from "usehooks-ts";
 import { trpc } from "@/app/_trpc/client";
 import { AppBackButton } from "@/components/common/AppBackButton";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const LeaderboardPage = () => {
   const router = useRouter();
@@ -55,15 +61,9 @@ const LeaderboardPage = () => {
                 <td className="border p-2 text-center">{item.stationCount}</td>
                 <td className="border p-2">
                   {item.updatedAt
-                    ? new Date(item.updatedAt).toLocaleString("th-TH", {
-                        timeZone: "Asia/Bangkok",
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit",
-                      })
+                    ? dayjs(item.updatedAt)
+                        .tz("Asia/Bangkok")
+                        .format("YYYY-MM-DD HH:mm:ss")
                     : "-"}
                 </td>
               </tr>
