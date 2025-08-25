@@ -93,6 +93,7 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
+        // แปลง DATETIME Bangkok → string Bangkok ตรง ๆ
         const updatedAtBangkok = row.updatedAt
           ? dayjs
               .tz(row.updatedAt, "Asia/Bangkok")
