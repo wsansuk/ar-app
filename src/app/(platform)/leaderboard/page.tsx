@@ -59,14 +59,7 @@ const LeaderboardPage = () => {
                 <td className="border p-2 text-center">{idx + 1}</td>
                 <td className="border p-2">{item.userName}</td>
                 <td className="border p-2 text-center">{item.stationCount}</td>
-                <td className="border p-2">
-                  {item.updatedAt
-                    ? dayjs
-                        .utc(item.updatedAt)
-                        .tz("Asia/Bangkok")
-                        .format("YYYY-MM-DD HH:mm:ss")
-                    : "-"}
-                </td>
+                <td className="border p-2">{item.updatedAt || "-"}</td>
               </tr>
             ))}
           </tbody>

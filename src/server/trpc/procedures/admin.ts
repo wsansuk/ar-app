@@ -7,9 +7,8 @@ import { publicProcedure, router } from "../trpc";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc);
+
 dayjs.extend(timezone);
 
 export const AdminProcedure = router({
@@ -89,11 +88,12 @@ export const AdminProcedure = router({
           "station4",
           "station5",
         ];
+
         const stationCount = stationKeys.filter(
           (key) => row[key] !== null
         ).length;
 
-        // แปลง DATETIME Bangkok → string Bangkok ตรง ๆ
+        // แปลง updatedAt เป็น Bangkok local string
         const updatedAtBangkok = row.updatedAt
           ? dayjs
               .tz(row.updatedAt, "Asia/Bangkok")
@@ -103,7 +103,7 @@ export const AdminProcedure = router({
         return {
           userName: row.userName,
           stationCount,
-          updatedAt: updatedAtBangkok,
+          updatedAt: updatedAtBangkok, // string Bangkok local
         };
       });
 
@@ -118,15 +118,7 @@ export const AdminProcedure = router({
         );
       });
 
-      return formatResponse(
-        "leaderboard",
-        result.map((r) => ({
-          ...r,
-          updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : null,
-        })),
-        "Success",
-        "0000"
-      );
+      return formatResponse("leaderboard", result, "Success", "0000");
     } catch (error) {
       console.error(error);
       return formatResponse(
