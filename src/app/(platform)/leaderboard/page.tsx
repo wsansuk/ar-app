@@ -6,15 +6,6 @@ import { useReadLocalStorage } from "usehooks-ts";
 import { trpc } from "@/app/_trpc/client";
 import { AppBackButton } from "@/components/common/AppBackButton";
 
-// Import dayjs + plugins
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-
-// Extend dayjs ด้วย plugin
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
 const LeaderboardPage = () => {
   const router = useRouter();
   const adminToken = useReadLocalStorage<string>("admin_token");
