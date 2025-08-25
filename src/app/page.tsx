@@ -21,63 +21,24 @@ export default function Home() {
 
   return (
     <div className="p-4 flex flex-col w-full h-screen justify-center">
-      {/* ✅ HomeCarousel 1 */}
-      <div className="pointer-events-none">
-        <AnimatedContent
-          distance={150}
-          direction="horizontal"
-          reverse={false}
-          duration={0.75}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.2}
-        >
-          <div className="pointer-events-auto">
-            <HomeCarousel />
-          </div>
-        </AnimatedContent>
-      </div>
+      <AnimatedContent
+        distance={150}
+        direction="horizontal"
+        reverse={false}
+        duration={0.75}
+        ease="power3.out"
+        initialOpacity={0}
+        animateOpacity
+        threshold={0.2}
+        delay={0.2}
+      >
+        <HomeCarousel />
+      </AnimatedContent>
 
-      {/* ✅ HomeCarousel 2 */}
-      <div className="pointer-events-none">
-        <AnimatedContent
-          distance={150}
-          direction="horizontal"
-          reverse={false}
-          duration={0.75}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.2}
-        >
-          <div className="pointer-events-auto">
-            <HomeCarousel />
-          </div>
-        </AnimatedContent>
-      </div>
-
-      {/* ✅ ปุ่ม Get Started */}
-      <div className="pointer-events-none mt-4">
-        <AnimatedContent
-          distance={150}
-          direction="horizontal"
-          reverse={false}
-          duration={0.75}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.2}
-        >
-          <div className="flex justify-end pr-1 relative z-50 pointer-events-auto">
-            <Button asChild>
-              <Link href={next_link}>Getting Started</Link>
-            </Button>
-          </div>
-        </AnimatedContent>
+      <div className="flex justify-end pr-1 mt-4">
+        <Button asChild>
+          <Link href={next_link}>Getting Started</Link>
+        </Button>
       </div>
     </div>
   );
