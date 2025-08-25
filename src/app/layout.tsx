@@ -43,12 +43,14 @@ export default function RootLayout({
             defaultTheme="dark"
             forcedTheme="dark"
           >
-            {/* คอนเทนต์หลัก */}
-            <div className="min-h-screen flex flex-col">
-              <div className="flex-1 pb-28">{children}</div>
+            {/* ครอบทั้ง content + logo ด้วย background */}
+            <div className="relative min-h-screen flex flex-col">
+              <BackgroundGradientAnimation />
 
-              {/* Logo ชิดล่าง แต่ไม่ทับปุ่ม เพราะใช้ padding กันไว้ */}
-              <div className="w-full flex justify-center pb-4">
+              <div className="relative z-10 flex-1 pb-28">{children}</div>
+
+              {/* Logo อยู่ข้างใน ไม่ตกนอกกรอบ */}
+              <div className="relative z-10 w-full flex justify-center pb-4">
                 <Image
                   width={140}
                   height={60}
@@ -58,9 +60,6 @@ export default function RootLayout({
                 />
               </div>
             </div>
-
-            {/* แอนิเมชันพื้นหลัง */}
-            <BackgroundGradientAnimation />
           </ThemeProvider>
         </TRPCProvider>
       </body>
