@@ -32,9 +32,11 @@ export default function Home() {
         <HomeCarousel />
       </AnimatedContent>
 
-      <Link href={next_link}>
-        <Button>Getting Started</Button>
-      </Link>
+      <div className="flex justify-end pr-1 mt-4 relative z-50">
+        <Button asChild>
+          <a href={next_link}>Getting Started</a>
+        </Button>
+      </div>
     </div>
   );
 }
