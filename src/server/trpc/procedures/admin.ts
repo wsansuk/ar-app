@@ -99,7 +99,7 @@ export const AdminProcedure = router({
         // แปลง updatedAt จาก UTC → Bangkok local
         const updatedAtBangkok = row.updatedAt
           ? dayjs
-              .utc(row.updatedAt)
+              .utc(row.updatedAt.toISOString())
               .tz("Asia/Bangkok")
               .format("YYYY-MM-DD HH:mm:ss")
           : null;
