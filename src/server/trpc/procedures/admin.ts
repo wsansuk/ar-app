@@ -97,7 +97,8 @@ export const AdminProcedure = router({
         ).length;
 
         const updatedAtBangkok = row.updatedAt
-          ? dayjs(new Date(`${row.updatedAt}Z`))
+          ? dayjs
+              .utc(row.updatedAt + "Z") // เติม Z ให้ JS treat เป็น UTC
               .tz("Asia/Bangkok")
               .format("YYYY-MM-DD HH:mm:ss")
           : null;
@@ -110,19 +111,19 @@ export const AdminProcedure = router({
       });
 
       // sort: มาก → น้อย, ถ้าเท่ากัน updatedAt น้อยก่อน
-      result.sort((a, b) => {
-        // sort by stationCount มาก → น้อย
-        if (b.stationCount !== a.stationCount)
-          return b.stationCount - a.stationCount;
+      // result.sort((a, b) => {
+      //   // sort by stationCount มาก → น้อย
+      //   if (b.stationCount !== a.stationCount)
+      //     return b.stationCount - a.stationCount;
 
-        if (!a.updatedAt) return 1;
-        if (!b.updatedAt) return -1;
+      //   if (!a.updatedAt) return 1;
+      //   if (!b.updatedAt) return -1;
 
-        const aTime = dayjs.tz(a.updatedAt, "Asia/Bangkok").valueOf();
-        const bTime = dayjs.tz(b.updatedAt, "Asia/Bangkok").valueOf();
+      //   const aTime = dayjs.tz(a.updatedAt, "Asia/Bangkok").valueOf();
+      //   const bTime = dayjs.tz(b.updatedAt, "Asia/Bangkok").valueOf();
 
-        return aTime - bTime; // updatedAt น้อย → มาก
-      });
+      //   return aTime - bTime; // updatedAt น้อย → มาก
+      // });
 
       return formatResponse("leaderboard", result, "Success", "0000");
     } catch (error) {
