@@ -93,15 +93,16 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
-        // แปลง local Bangkok -> UTC
-        const updatedAtUtc = row.updatedAt
-          ? dayjs.tz(row.updatedAt, "Asia/Bangkok").utc().format() // หรือ .toISOString()
+        const updatedAtBangkok = row.updatedAt
+          ? dayjs
+              .tz(row.updatedAt, "Asia/Bangkok")
+              .format("YYYY-MM-DD HH:mm:ss")
           : null;
 
         return {
           userName: row.userName,
           stationCount,
-          updatedAt: updatedAtUtc,
+          updatedAt: updatedAtBangkok,
         };
       });
 
