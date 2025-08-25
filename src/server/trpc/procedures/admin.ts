@@ -6,6 +6,11 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const AdminProcedure = router({
   // =================== Login admin ===================
@@ -88,10 +93,14 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
+        const updatedAtUtc = row.updatedAt
+          ? dayjs.tz(row.updatedAt, "Asia/Bangkok").utc().toISOString()
+          : null;
+
         return {
           userName: row.userName,
           stationCount,
-          updatedAt: row.updatedAt,
+          updatedAt: updatedAtUtc,
         };
       });
 
