@@ -93,6 +93,7 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
+        // ถ้า DB DATETIME เป็น Bangkok → แปลงเป็น UTC
         const updatedAtUtc = row.updatedAt
           ? dayjs.tz(row.updatedAt, "Asia/Bangkok").utc().toISOString()
           : null;
