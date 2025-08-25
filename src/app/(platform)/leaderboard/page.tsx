@@ -61,9 +61,9 @@ const LeaderboardPage = () => {
                 <td className="border p-2 text-center">{item.stationCount}</td>
                 <td className="border p-2">
                   {item.updatedAt
-                    ? dayjs
-                        .utc(item.updatedAt)
-                        .tz("Asia/Bangkok")
+                    ? dayjs(item.updatedAt)
+                        .utcOffset(0) // treat as UTC
+                        .tz("Asia/Bangkok") // convert to Bangkok
                         .format("YYYY-MM-DD HH:mm:ss")
                     : "-"}
                 </td>
