@@ -1,25 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
+import Link from "next/link";
+import { useMemo } from "react";
 import { useReadLocalStorage } from "usehooks-ts";
 
 import AnimatedContent from "@/components/blocks/Animations/AnimatedContent/AnimatedContent";
-import { AppButton } from "@/components/common/AppButton";
 import { HomeCarousel } from "@/modules/home/components/HomeCarousel";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const router = useRouter();
   const username = useReadLocalStorage<string>("wd_ar_workshop");
 
-  const handleClick = () => {
+  const next_link = useMemo(() => {
     if (username) {
-      router.push("/collection");
+      return "/collection";
     } else {
-      router.push("/register");
+      return "/register";
     }
-  };
+  }, [username]);
 
   return (
     <div className="p-4 flex flex-col w-full h-screen justify-center">
@@ -47,8 +45,10 @@ export default function Home() {
         threshold={0.2}
         delay={0.2}
       >
-        <div className="flex justify-end pr-1 mt-4 relative z-50">
-          <Button onClick={handleClick}>Getting Started</Button>
+        <div className="flex justify-end pr-1 mt-4">
+          <Button asChild>
+            <Link href={next_link}>Getting Started</Link>
+          </Button>
         </div>
       </AnimatedContent>
     </div>
