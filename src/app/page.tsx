@@ -34,19 +34,8 @@ export default function Home() {
       >
         <HomeCarousel />
       </AnimatedContent>
-      <AnimatedContent
-        distance={150}
-        direction="horizontal"
-        reverse={false}
-        duration={0.75}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.2}
-      >
-        <HomeCarousel />
-      </AnimatedContent>
+
+      {/* ปุ่มอยู่นอก AnimatedContent */}
       <div className="flex justify-end pr-1 mt-4 relative z-50">
         <Button asChild>
           <Link href={next_link}>Getting Started</Link>
