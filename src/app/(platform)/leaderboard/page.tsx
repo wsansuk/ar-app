@@ -5,10 +5,13 @@ import { useRouter } from "next/navigation";
 import { useReadLocalStorage } from "usehooks-ts";
 import { trpc } from "@/app/_trpc/client";
 import { AppBackButton } from "@/components/common/AppBackButton";
+
+// Import dayjs + plugins
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
+// Extend dayjs ด้วย plugin
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -52,10 +55,7 @@ const LeaderboardPage = () => {
           </thead>
           <tbody>
             {data.map((item: any, idx: number) => (
-              <tr
-                key={idx}
-                // className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
-              >
+              <tr key={idx}>
                 <td className="border p-2 text-center">{idx + 1}</td>
                 <td className="border p-2">{item.userName}</td>
                 <td className="border p-2 text-center">{item.stationCount}</td>
