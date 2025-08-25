@@ -1,7 +1,6 @@
 "use client";
 
 import { notFound, useParams, useRouter } from "next/navigation";
-import { TrophyIcon } from "lucide-react";
 import { AppHeader } from "@/components/common/AppHeader";
 import AnimatedContent from "@/components/blocks/Animations/AnimatedContent/AnimatedContent";
 

@@ -173,4 +173,104 @@ export const ActivitiesProcedure = router({
       );
     }
   }),
+
+  getAllRegisteredStation: publicProcedure
+    .input(
+      z.object({
+        userName: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      try {
+        const userName = input.userName.trim();
+
+        if (!userName) {
+          throw Error("Username not found");
+        }
+
+        const result = await db
+          .select()
+          .from(activities)
+          .where(eq(activities.userName, userName));
+
+        return {
+          station1: !!result[0].station1,
+          station2: !!result[0].station2,
+          station3: !!result[0].station3,
+          station4: !!result[0].station4,
+          station5: !!result[0].station5,
+        };
+      } catch (err) {
+        return {
+          station1: null,
+          station2: null,
+          station3: null,
+          station4: null,
+          station5: null,
+        };
+      }
+    }),
+
+  getUserScore: publicProcedure
+    .input(
+      z.object({
+        userName: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      try {
+        const rows = await db
+          .select()
+          .from(activities)
+          .where(eq(activities.userName, input.userName));
+
+        const stationKeys = [
+          "station1",
+          "station2",
+          "station3",
+          "station4",
+          "station5",
+        ] as const;
+
+        const result = rows.map((row) => {
+          const stationCount = stationKeys.filter(
+            (key) => row[key] !== null
+          ).length;
+
+          const xp = stationCount * 100;
+
+          const timeDiffMs =
+            row.updatedAt && row.createdAt
+              ? new Date(row.updatedAt).getTime() -
+                new Date(row.createdAt).getTime()
+              : 0;
+
+          // Convert to minutes
+          const timeDiffMins = Math.floor(timeDiffMs / (1000 * 60));
+
+          return {
+            userName: row.userName,
+            xp,
+            stationCount,
+            timeDiffMins,
+          };
+        });
+
+        result.sort((a, b) => {
+          if (b.stationCount !== a.stationCount) {
+            return b.stationCount - a.stationCount;
+          }
+          return a.timeDiffMins - b.timeDiffMins;
+        });
+
+        return formatResponse("score", result, "Success", "0000");
+      } catch (err) {
+        return formatResponse(
+          "score",
+          null,
+          "Cannot get leader board, please try again",
+          "0004"
+        );
+      }
+    }),
 });

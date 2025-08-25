@@ -5,14 +5,29 @@ import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import React from "react";
 
-export const AppBackButton = () => {
+interface AppBackButtonProps {
+  variant?:
+    | "link"
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | null
+    | undefined;
+}
+
+export const AppBackButton = ({
+  variant = "outline",
+}: React.ComponentProps<"button"> & AppBackButtonProps) => {
   const router = useRouter();
 
   return (
     <Button
       size="icon"
-      variant="outline"
+      variant={variant}
       onClick={() => router.back()}
       className="relative"
     >

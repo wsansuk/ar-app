@@ -34,7 +34,7 @@ const CollectionPage = () => {
             <BookCheckIcon className="mr-2" />
             <h1 className="text-lg font-semibold">Collection</h1>
           </div>
-          <Collections />
+          <Collections username={username!} />
         </div>
       </AnimatedContent>
     </div>

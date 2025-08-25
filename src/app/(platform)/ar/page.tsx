@@ -1,22 +1,17 @@
 "use client";
+import { AppBackButton } from "@/components/common/AppBackButton";
 import { notFound } from "next/navigation";
-import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
+import { useReadLocalStorage } from "usehooks-ts";
 
 const ArPage = () => {
   const username = useReadLocalStorage<string>("wd_ar_workshop");
-
   if (!username) notFound();
 
-  const [isAcknowledge, setIsAcknowledge] = useLocalStorage(
-    "wd_ar_acknowledge",
-    false
-  );
-
-  // if (!isAcknowledge) {
-  //   return <div>Instruction</div>;
-  // }
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute top-4 left-4">
+        <AppBackButton variant="secondary" />
+      </div>
       {/* iframe */}
       <iframe
         src={`https://wsansuk.github.io/web-ar-app?username=${username}`}

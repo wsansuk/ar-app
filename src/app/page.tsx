@@ -7,6 +7,7 @@ import { useReadLocalStorage } from "usehooks-ts";
 import AnimatedContent from "@/components/blocks/Animations/AnimatedContent/AnimatedContent";
 import { AppButton } from "@/components/common/AppButton";
 import { HomeCarousel } from "@/modules/home/components/HomeCarousel";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function Home() {
         delay={0.2}
       >
         <div className="flex justify-end pr-1 mt-4">
-          <AppButton onClick={handleClick}>Getting Started</AppButton>
+          <Button onClick={handleClick}>Getting Started</Button>
         </div>
       </AnimatedContent>
     </div>

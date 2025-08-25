@@ -7,13 +7,18 @@ import AnimatedContent from "@/components/blocks/Animations/AnimatedContent/Anim
 import { AppBackButton } from "@/components/common/AppBackButton";
 import { AppHomeButton } from "@/components/common/AppHomeButton";
 import { CoinsIcon, UserIcon } from "lucide-react";
+import { trpc } from "@/app/_trpc/client";
 
 interface AppHeaderProps {
-  username?: string;
+  username: string;
 }
 
 export const AppHeader = ({ username }: AppHeaderProps) => {
   const pathname = usePathname();
+
+  const { data } = trpc.activities.getUserScore.useQuery({
+    userName: username,
+  });
 
   const ActionButton = useMemo(
     () => (pathname == "/collection" ? <AppHomeButton /> : <AppBackButton />),
@@ -40,7 +45,7 @@ export const AppHeader = ({ username }: AppHeaderProps) => {
         </div>
         <div className="flex items-center font-semibold ml-auto text-xs bg-cyan-500/40 p-1.5 px-2 rounded">
           <CoinsIcon className="size-4 mt-0.5 mr-1" />
-          <p>Point</p>
+          <p>{data?.score[0]?.xp} Point</p>
         </div>
       </div>
     </AnimatedContent>
