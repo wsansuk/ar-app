@@ -117,8 +117,8 @@ export const AdminProcedure = router({
         if (!a.updatedAt) return 1;
         if (!b.updatedAt) return -1;
 
-        const aTime = dayjs.utc(a.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
-        const bTime = dayjs.utc(b.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
+        const aTime = dayjs(a.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
+        const bTime = dayjs(b.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
         return aTime - bTime;
       });
 
