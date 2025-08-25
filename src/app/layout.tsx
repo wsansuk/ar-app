@@ -33,12 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pb-20 sm:pb-28`}
       >
         <TRPCProvider>
           <ThemeProvider
@@ -46,16 +43,21 @@ export default function RootLayout({
             defaultTheme="dark"
             forcedTheme="dark"
           >
+            {/* คอนเทนต์หลัก */}
             {children}
-            <div className="absolute bottom-0 z-[999] w-full h-auto flex justify-center">
+
+            {/* โลโก้ด้านล่าง */}
+            <div className="absolute bottom-0 z-[10] w-full flex justify-center">
               <Image
-                width={100}
-                height={0}
-                objectFit="cover"
+                width={140}
+                height={60}
                 alt="TPE Logo"
                 src="/assets/TPE-Logo.png"
+                className="sm:w-[160px] md:w-[200px] h-auto"
               />
             </div>
+
+            {/* แอนิเมชันพื้นหลัง */}
             <BackgroundGradientAnimation />
           </ThemeProvider>
         </TRPCProvider>
