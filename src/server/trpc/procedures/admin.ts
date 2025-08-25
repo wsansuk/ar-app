@@ -8,7 +8,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
-
 dayjs.extend(timezone);
 
 export const AdminProcedure = router({
@@ -88,12 +87,10 @@ export const AdminProcedure = router({
           "station4",
           "station5",
         ];
-
         const stationCount = stationKeys.filter(
           (key) => row[key] !== null
         ).length;
 
-        // แปลง updatedAt เป็น Bangkok local string
         const updatedAtBangkok = row.updatedAt
           ? dayjs
               .tz(row.updatedAt, "Asia/Bangkok")
@@ -103,7 +100,7 @@ export const AdminProcedure = router({
         return {
           userName: row.userName,
           stationCount,
-          updatedAt: updatedAtBangkok, // string Bangkok local
+          updatedAt: updatedAtBangkok,
         };
       });
 
@@ -113,8 +110,10 @@ export const AdminProcedure = router({
           return b.stationCount - a.stationCount;
         if (!a.updatedAt) return 1;
         if (!b.updatedAt) return -1;
+
         return (
-          new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
+          dayjs.tz(a.updatedAt, "Asia/Bangkok").valueOf() -
+          dayjs.tz(b.updatedAt, "Asia/Bangkok").valueOf()
         );
       });
 
