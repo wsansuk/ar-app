@@ -45,12 +45,13 @@ export default function Home() {
         threshold={0.2}
         delay={0.2}
       >
-        <div className="flex justify-end pr-1 mt-4">
-          <Button asChild>
-            <Link href={next_link}>Getting Started</Link>
-          </Button>
-        </div>
+        <HomeCarousel />
       </AnimatedContent>
+      <div className="flex justify-end pr-1 mt-4 relative z-50">
+        <Button asChild>
+          <Link href={next_link}>Getting Started</Link>
+        </Button>
+      </div>
     </div>
   );
 }
