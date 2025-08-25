@@ -16,27 +16,29 @@ export default function Home() {
   }, [username]);
 
   return (
-    <div className="relative p-4 flex flex-col w-full h-screen justify-center">
-      {/* Carousel */}
-      <AnimatedContent
-        distance={150}
-        direction="horizontal"
-        reverse={false}
-        duration={0.75}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.2}
-      >
-        <HomeCarousel />
-      </AnimatedContent>
-
-      <div className="flex justify-end pr-1 mt-4 relative z-50">
-        <Button asChild>
-          <a href={next_link}>Getting Started</a>
-        </Button>
+    <>
+      <div className="relative p-4 flex flex-col w-full h-screen justify-center">
+        <AnimatedContent
+          distance={150}
+          direction="horizontal"
+          reverse={false}
+          duration={0.75}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          threshold={0.2}
+          delay={0.2}
+        >
+          <HomeCarousel />
+        </AnimatedContent>
       </div>
-    </div>
+
+      {/* ปุ่มอยู่บน top layer แยก context */}
+      <div className="fixed bottom-4 right-4 z-[9999]">
+        <Link href={next_link}>
+          <Button>Getting Started</Button>
+        </Link>
+      </div>
+    </>
   );
 }
