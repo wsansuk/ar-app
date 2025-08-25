@@ -50,7 +50,23 @@ const LeaderboardPage = () => {
                 <td className="border p-2 text-center">{idx + 1}</td>
                 <td className="border p-2">{item.userName}</td>
                 <td className="border p-2 text-center">{item.stationCount}</td>
-                <td className="border p-2">{item.updatedAt || "-"}</td>
+                <td className="border p-2">
+                  {item.updatedAt
+                    ? (() => {
+                        const d = new Date(item.updatedAt);
+                        // ลบ 7 ชั่วโมง
+                        d.setHours(d.getHours() - 7);
+                        // แปลงเป็น string YYYY-MM-DD HH:mm:ss
+                        const yyyy = d.getFullYear();
+                        const mm = String(d.getMonth() + 1).padStart(2, "0");
+                        const dd = String(d.getDate()).padStart(2, "0");
+                        const hh = String(d.getHours()).padStart(2, "0");
+                        const mi = String(d.getMinutes()).padStart(2, "0");
+                        const ss = String(d.getSeconds()).padStart(2, "0");
+                        return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
+                      })()
+                    : "-"}
+                </td>
               </tr>
             ))}
           </tbody>
