@@ -44,14 +44,11 @@ export default function RootLayout({
             forcedTheme="dark"
           >
             {/* Container หลัก */}
-            <div className="relative min-h-screen flex flex-col justify-between bg-blue-600/20 p-4">
-              {/* Background Animation */}
+            <div className="relative min-h-screen flex flex-col justify-between bg-blue-600/20 px-4 pb-2 pt-2">
               <BackgroundGradientAnimation />
 
-              {/* Content */}
               <div className="flex-1 z-10">{children}</div>
 
-              {/* Logo */}
               <div className="flex justify-center z-10">
                 <Image
                   width={140}
