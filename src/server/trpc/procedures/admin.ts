@@ -96,9 +96,9 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
-        // แปลง updatedAt เป็น Bangkok local string
         const updatedAtBangkok = row.updatedAt
-          ? dayjs(row.updatedAt)
+          ? dayjs
+              .utc(row.updatedAt)
               .tz("Asia/Bangkok")
               .format("YYYY-MM-DD HH:mm:ss")
           : null;
@@ -117,10 +117,8 @@ export const AdminProcedure = router({
         if (!a.updatedAt) return 1;
         if (!b.updatedAt) return -1;
 
-        // แปลงเป็น timestamp Bangkok ด้วย dayjs.utc + offset 0
-        const aTime = new Date(a.updatedAt + " +07:00").getTime();
-        const bTime = new Date(b.updatedAt + " +07:00").getTime();
-
+        const aTime = dayjs.utc(a.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
+        const bTime = dayjs.utc(b.updatedAt, "YYYY-MM-DD HH:mm:ss").valueOf();
         return aTime - bTime;
       });
 
