@@ -94,14 +94,16 @@ export const AdminProcedure = router({
         ).length;
 
         // แปลง DATETIME Bangkok → string Bangkok ตรง ๆ
-        const updatedAtUtc = row.updatedAt
-          ? dayjs.tz(row.updatedAt, "Asia/Bangkok").utc().toISOString()
+        const updatedAtBangkok = row.updatedAt
+          ? dayjs
+              .tz(row.updatedAt, "Asia/Bangkok")
+              .format("YYYY-MM-DD HH:mm:ss")
           : null;
 
         return {
           userName: row.userName,
           stationCount,
-          updatedAt: updatedAtUtc,
+          updatedAt: updatedAtBangkok,
         };
       });
 
