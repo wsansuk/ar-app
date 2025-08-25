@@ -96,6 +96,7 @@ export const AdminProcedure = router({
           (key) => row[key] !== null
         ).length;
 
+        // แปลง updatedAt จาก UTC → Bangkok local
         const updatedAtBangkok = row.updatedAt
           ? dayjs
               .utc(row.updatedAt)

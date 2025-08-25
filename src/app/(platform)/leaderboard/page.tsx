@@ -51,7 +51,7 @@ const LeaderboardPage = () => {
                 <td className="border p-2">{item.userName}</td>
                 <td className="border p-2 text-center">{item.stationCount}</td>
                 <td className="border p-2">
-                  {item.updatedAt
+                  {/* {item.updatedAt
                     ? (() => {
                         const d = new Date(item.updatedAt);
                         // ลบ 7 ชั่วโมง
@@ -65,7 +65,8 @@ const LeaderboardPage = () => {
                         const ss = String(d.getSeconds()).padStart(2, "0");
                         return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
                       })()
-                    : "-"}
+                    : "-"} */}
+                  {item.updatedAt || "-"}
                 </td>
               </tr>
             ))}
