@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased pb-20 sm:pb-28`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TRPCProvider>
           <ThemeProvider
@@ -44,17 +44,19 @@ export default function RootLayout({
             forcedTheme="dark"
           >
             {/* คอนเทนต์หลัก */}
-            {children}
+            <div className="min-h-screen flex flex-col">
+              <div className="flex-1 pb-28">{children}</div>
 
-            {/* โลโก้ด้านล่าง */}
-            <div className="absolute bottom-0 z-[10] w-full flex justify-center">
-              <Image
-                width={140}
-                height={60}
-                alt="TPE Logo"
-                src="/assets/TPE-Logo.png"
-                className="sm:w-[160px] md:w-[200px] h-auto"
-              />
+              {/* Logo ชิดล่าง แต่ไม่ทับปุ่ม เพราะใช้ padding กันไว้ */}
+              <div className="w-full flex justify-center pb-4">
+                <Image
+                  width={140}
+                  height={60}
+                  alt="TPE Logo"
+                  src="/assets/TPE-Logo.png"
+                  className="sm:w-[160px] md:w-[200px] h-auto"
+                />
+              </div>
             </div>
 
             {/* แอนิเมชันพื้นหลัง */}
