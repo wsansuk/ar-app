@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   // เคลียร์ค่า wd_ar_workshop ตอนเข้าหน้า Home
-  useEffect(() => {
-    localStorage.removeItem("wd_ar_workshop");
-  }, []);
+  // useEffect(() => {
+  //   localStorage.removeItem("wd_ar_workshop");
+  // }, []);
 
   const username = useReadLocalStorage<string>("wd_ar_workshop");
 
